@@ -1,0 +1,49 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express = require("express");
+const app = new express();
+const mysql = require("mysql2");
+const bodyParser = require("body-parser");
+var con = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "root",
+    database: "album",
+});
+let port = 4000;
+con.connect((err) => {
+    if (err) {
+        console.log(err);
+        console.log('Error connecting to Db');
+        return;
+    }
+    // var sql = "CREATE TABLE listalbums (ID INT(10),name VARCHAR(255))";
+    // con.query(sql, function (err, result) {
+    //     if (err) throw err;
+    //     console.log("Table created");
+    // });
+});
+app.use(bodyParser.json()); // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use((req, resp, next) => {
+    resp.header("Access-Control-Allow-Origin", "*");
+    next();
+});
+app.listen(port, () => {
+    console.log("listening port", port);
+});
+app.get('/', (req, resp) => {
+    resp.send("success");
+});
+app.post('/albums', function (req, res) {
+    var params = req.body;
+    console.log(params);
+    con.query('INSERT INTO albums SET ?', params, (error, results, fields) => {
+        if (error)
+            throw error;
+        res.end(JSON.stringify(results));
+    });
+});
+//# sourceMappingURL=index.js.map

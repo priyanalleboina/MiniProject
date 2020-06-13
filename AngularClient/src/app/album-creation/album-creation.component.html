@@ -1,0 +1,50 @@
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h4>Add Music-Album</h4>
+                <form [formGroup]="musicAlbumForm" (ngSubmit)="addAlbumMusic()">
+                    <div class="form-group">
+                        <label>Select Album</label>
+                        <select formControlName="album_id" class="form-control">
+                            <option value="">select Album</option>
+                            <option value="{{data.album_id}}" *ngFor="let data of albumData">{{data.album_name}}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Select Artist</label>
+                        <select formControlName="artist_id" class="form-control">
+                            <option value="">select Artist</option>
+                            <option value="{{data.artist_id}}" *ngFor="let data of artistsData">{{data.artist_name}}</option>
+                    </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Select Title</label>
+                        <select formControlName="title_id" class="form-control">
+                            <option value="">select Title</option>
+                            <option value="{{data.title_id}}" *ngFor="let data of titelsData">{{data.title_name}}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Genre Type</label>
+                        <select formControlName="genre_id" class="form-control">
+                            <option value="">select Genre</option>
+                            <option value="{{data.genre_id}}" *ngFor="let data of genreData">{{data.genere_name}}</option>
+                        </select>
+        
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="success" class="alert alert-success">
+    <strong>Success!</strong> Album Added Successfull.
+</div>

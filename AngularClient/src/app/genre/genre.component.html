@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form [formGroup]="genreForm" (ngSubmit)="addGenre()">
+                <div class="form-group">
+                    <label>Genre Name</label>
+                    <input type="text" class="form-control" formControlName="genere_name">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th>Genre Id</th>
+                    <th>Genre Type</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let x of genreData">
+                    <td>{{x.genre_id}}</td>
+                    <td>{{x.genere_name}}</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+    <div class="form-group col-md-10 offset-1">
+        <form [formGroup]="byIdGenreForm" (submit)="GenreByIdForm();">
+            <label>Select Genre</label>
+            <select formControlName="genre_id" class="form-control">
+                <option value="">select Genre</option>
+                <option value="{{data.genre_id}}" *ngFor="let data of genreData">{{data.genere_name}}</option>
+            </select>
+            <div class="form-group">
+                <br />
+                <button class="btn btn-primary">Get Data</button>
+                <br />
+                <table class="table" *ngIf="disp">
+                    <thead>
+                        <tr>
+                            <th>Album Id</th>
+                            <th>Album Name</th>
+                            <th>Year</th>
+                            <th>Title Id</th>
+                            <th>Title Name</th>
+                            <th>Artist Name</th>
+                            <th>Profession</th>
+                            <th>Genre Id</th>
+                            <th>Genre Name</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let x of byIdGenreData">
+                            <td>{{x.album_id}}</td>
+                            <td>{{x.album_name}}</td>
+                            <td>{{x.year}}</td>
+                            <td>{{x.title_id}}</td>
+                            <td>{{x.title_name}}</td>
+                            <td>{{x.artist_name}}</td>
+                            <td>{{x.profession}}</td>
+                            <td>{{x.genre_id}}</td>
+                            <td>{{x.genere_name}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
+</div>
